@@ -10,6 +10,7 @@
   ;; f(a, b) = 333.75 * b^6 + a^2 * (11 * a^2 * b^2 - b^6 - 121 * b^4 - 2) + 5.5 * b^8 + a/(2b)
   ;; a = 77617, b = 33096
   ;; Answer: -0.82739605...
+  ;; Requires ~ 130 bits of precision
   (let* ((ans -0.82739605)
          (a (make-mp-float :significand 77617))
          (b (make-mp-float :significand 33096))
