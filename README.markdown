@@ -1,6 +1,7 @@
 # mp-float
-Pure Common Lisp-implemented multiple-precision floating-point numbers.
+Pure Common Lisp-implemented multiple-precision floating-point numbers system.
 
 ## Usage
+```lisp
 
-## Installation
+```
