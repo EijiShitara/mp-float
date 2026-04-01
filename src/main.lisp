@@ -1,11 +1,13 @@
 (uiop:define-package mp-float
   (:use #:cl)
   (:export #:mp-float
+           #:make-mp-float
            #:mp-normalize
            #:mp+
            #:mp-
            #:mp*
            #:mp/
+           #:mp-expt
            #:mp-float->double
            #:double->mp-float
            #:mp-sqrt))
@@ -77,6 +79,25 @@
      (make-mp-float :significand sig
                     :exponent   exp
                     :precision  prec))))
+
+(defun mp-expt (base power)
+  (cond ((zerop power)
+         (make-mp-float :significand 1
+                        :exponent 0
+                        :precision (mp-float-precision base)))
+        ((> power 0)
+         (let ((result base))
+           (dotimes (_ (1- power))
+             (setf result (mp* result base)))
+           result))
+        ((< power 0)
+         (let ((result (make-mp-float :significand 1
+                                      :exponent 0
+                                      :precision (mp-float-precision base))))
+           (dotimes (_ (- power))
+             (setf result (mp/ result base)))
+           result))
+        (t (error "Power not integer"))))
 
 (defun mp-float->double (f)
   "mp-float を double-float に変換する。
